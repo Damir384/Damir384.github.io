@@ -918,6 +918,23 @@
         </div>
       </div>
 
+      <div class="col-12 col-md-6 col-lg-4 py-3">
+        <div class="card text-center card-color">
+          <img src="img/coffee.png" class="card-img-top" alt="example_1">
+          <div class="card-body product-card">
+            <h5 class="card-title">Кофе</h5>
+            <p class="card-text text-left">Эспрессо - 60₽, Двойной Эспрессо - 100₽, Американо - 80₽, Капучино - 100₽, Латте - 100₽</p>
+            <div>
+              <input class="product-quantity mb-1" type="number" max="256" value="0" min="0" oninput="calculateTotalPrice()">
+              <button onclick="decreaseQuantity(this)" class="plus">-</button>
+              <button onclick="increaseQuantity(this)" class="minus">+</button>
+              <h6>60-<span class="product-price">100</span> РУБЛЕЙ</h6>
+            </div>
+            <button type="button" class="btn btn-color" data-toggle="modal" data-target="#exampleModal4">Заказать</button>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
