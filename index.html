@@ -1,55 +1,215 @@
 <!DOCTYPE html>
-<html lang="ru">
-
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Мой сайт</title>
-  <link rel="stylesheet" href="style/bootstrap.min.css">
-  <link rel="stylesheet" href="style/ARD-style.css">
-  <link rel="stylesheet" href="style/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARDamir384</title>
+    <style>
+        :root {
+            /* Внешний фон страницы */
+            --outer-bg: #11111b;
+
+            /* Классические ANSI / VGA цвета */
+            --term-bg: #000000;
+            --term-text: #ffffff;
+            --term-border: #555555;
+
+            --green: #00ff00;   /* Чистый терминальный фосфор */
+            --cyan: #00ffff;    /* Яркий циановый */
+            --yellow: #ffff00;  /* Чистый желтый */
+            --red: #ff3333;     /* Насыщенный красный */
+            --cursor: #ffffff;  /* Белый каноничный курсор */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--outer-bg);
+            color: var(--term-text);
+            font-family: "JetBrains Mono", "Cascadia Code", "Courier New", monospace;
+            font-size: 15px;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* Окно терминала с двойной рамкой */
+        .terminal-window {
+            width: 100%;
+            max-width: 680px;
+            background-color: var(--term-bg);
+            /* Двойная рамка borderDouble в классическом стиле */
+            border: 4px double var(--term-border);
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Заголовок окна терминала */
+        .terminal-header {
+            background-color: #1a1a1a;
+            border-bottom: 2px solid var(--term-border);
+            padding: 6px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #888888;
+            user-select: none;
+        }
+
+        .window-controls {
+            display: flex;
+            gap: 6px;
+        }
+
+        .control-dot {
+            width: 10px;
+            height: 10px;
+            border: 1px solid #444;
+            display: inline-block;
+        }
+
+        .terminal-body {
+            padding: 20px;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        /* Классические цвета синтаксиса */
+        .tag-cpp { color: var(--cyan); font-weight: bold; }
+        .tag-py { color: var(--yellow); font-weight: bold; }
+        .tag-linux { color: var(--green); font-weight: bold; }
+        .quote { color: var(--red); font-style: italic; }
+
+        /* Терминальные кликабельные кнопки */
+        .cli-btn {
+            color: var(--cyan);
+            text-decoration: none;
+            cursor: pointer;
+            display: inline-block;
+            transition: all 0.1s step-start;
+        }
+
+        .cli-btn:hover {
+            color: var(--term-bg);
+            background-color: var(--cyan);
+        }
+
+        /* Классический прямоугольный курсор */
+        #cursor {
+            display: inline-block;
+            width: 9px;
+            height: 1.1em;
+            background-color: var(--cursor);
+            vertical-align: text-bottom;
+            margin-left: 2px;
+        }
+
+        .blinking {
+            animation: blink 1s step-start infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+    </style>
 </head>
-
 <body>
-  <header class="text-white p-3">
-    <h1></h1>
-  </header>
 
-  <main class="container mt-4">
-    <div class="row justify-content-center">
-      <div class="col-7 col-sm-6 col-md-4">
-        <img src="img/avatar2.png" alt="my avatar" class="avatar" data-bs-toggle="tooltip" data-bs-html="true" title="ты думал что-то здесь будет?">
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12 col-sm-6 section-left text-center text-sm-right">
-          <h2>ARD384</h2>
-          <h3>Соц сети</h3>
-            <a href="" class="no_link">Facebook</a><br>
-            <a href="" class="no_link">Twitter</a><br>
-            <a href="" class="no_link">Instagram</a><br>
-            <a href="https://vk.com/ard384" class="link">ВК</a><br>
-      </div>
-      <div class="col-12 col-sm-6 section-right text-center text-sm-left">
-        <h2>Проводник</h2>
-        <div class="test">
-            <a href="1/" class="link">Сайт 1</a><br>
-            <a href="2/" class="link">Сайт 2</a><br>
-            <a href="3/" class="link">Сайт 3</a><br>
-            <a href="4/" class="link">Сайт 4</a><br>
+    <div class="terminal-window">
+        <div class="terminal-header">
+            <span>user@ElyOS: ~</span>
+            <div class="window-controls">
+                <span class="control-dot"></span>
+                <span class="control-dot"></span>
+                <span class="control-dot"></span>
+            </div>
         </div>
-      </div>
+        <div class="terminal-body"><span id="output"></span><span id="cursor" class="blinking"></span></div>
     </div>
-  </main>
 
-  <footer class="text-white p-3">
-    <p>Какие ещё авторские права на github</p>
-  </footer>
+    <script>
+        const scenario = [
+            { text: "ARDamir384 " },
+            { text: "{C++} ", class: "tag-cpp" },
+            { text: "{Python} ", class: "tag-py" },
+            { text: "{Linux}\n", class: "tag-linux" },
+            { text: "> Mankind is dead, Data is fuel, Bash is Full\n\n", class: "quote" },
+            { text: "[" },
+            { text: "ElyOS Installer", href: "https://github.com/Damir384/ElyOS-Installer", isExternal: true },
+            { text: "] [" },
+            { text: "DevSpace", href: "https://github.com/Damir384/DevSpace", isExternal: true },
+            { text: "] [" },
+            { text: "GitHub", href: "https://github.com/Damir384", isExternal: true },
+            { text: "] [" },
+            { text: "Coffee", href: "418.html", isLink: true },
+            { text: "]" }
+        ];
 
-  <script src="js/jquery-3.6.0.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/popper.min.js"></script>
-  <script src="js/test.js"></script>
+        const outputEl = document.getElementById("output");
+        const cursorEl = document.getElementById("cursor");
+
+        // Тайминги, настроенные вами
+        const TYPE_SPEED = 100;
+        const LINE_PAUSE = 800;
+        const START_DELAY = 1500;
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        async function typeWriter() {
+            cursorEl.classList.add("blinking");
+            await sleep(START_DELAY);
+
+            cursorEl.classList.remove("blinking");
+
+            for (const item of scenario) {
+                let targetElement = outputEl;
+
+                if (item.isLink) {
+                    const link = document.createElement("a");
+                    link.className = "cli-btn";
+                    link.href = item.href;
+                    outputEl.appendChild(link);
+                    targetElement = link;
+                } else if (item.isExternal) {
+                    const link = document.createElement("a");
+                    link.className = "cli-btn";
+                    link.href = item.href;
+                    link.target = "_blank";
+                    link.rel = "noopener noreferrer";
+                    outputEl.appendChild(link);
+                    targetElement = link;
+                } else if (item.class) {
+                    const span = document.createElement("span");
+                    span.className = item.class;
+                    outputEl.appendChild(span);
+                    targetElement = span;
+                }
+
+                for (let i = 0; i < item.text.length; i++) {
+                    const char = item.text[i];
+                    targetElement.appendChild(document.createTextNode(char));
+
+                    if (char === "\n") {
+                        await sleep(LINE_PAUSE);
+                    } else {
+                        await sleep(TYPE_SPEED);
+                    }
+                }
+            }
+
+            cursorEl.classList.add("blinking");
+        }
+
+        window.addEventListener("DOMContentLoaded", typeWriter);
+    </script>
 </body>
-
 </html>

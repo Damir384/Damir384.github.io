@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>418 I'm a Teapot</title>
+    <style>
+        :root {
+            --outer-bg: #11111b;
+            --term-bg: #000000;
+            --term-border: #555555;
+            --green: #00ff00;
+            --cyan: #00ffff;
+            --red: #ff3333;
+            --text-dim: #888888;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--outer-bg);
+            color: #ffffff;
+            font-family: "JetBrains Mono", "Cascadia Code", "Courier New", monospace;
+            font-size: 15px;
+            line-height: 1.5;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .terminal-window {
+            width: 100%;
+            max-width: 680px;
+            background-color: var(--term-bg);
+            border: 4px double var(--term-border);
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.8);
+        }
+
+        .terminal-header {
+            background-color: #1a1a1a;
+            border-bottom: 2px solid var(--term-border);
+            padding: 6px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--text-dim);
+            user-select: none;
+        }
+
+        .window-controls {
+            display: flex;
+            gap: 6px;
+        }
+
+        .control-dot {
+            width: 10px;
+            height: 10px;
+            border: 1px solid #444;
+            display: inline-block;
+        }
+
+        .terminal-body {
+            padding: 25px;
+            text-align: center;
+        }
+
+        /* ASCII-арт чайника */
+        .ascii-art {
+            color: var(--green);
+            font-family: monospace;
+            white-space: pre;
+            display: inline-block;
+            text-align: left;
+            margin: 15px 0;
+            font-size: 13px;
+            line-height: 1.2;
+        }
+
+        h1 {
+            color: var(--red);
+            font-size: 2em;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .status-msg {
+            color: var(--cyan);
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        .rfc-quote {
+            color: var(--text-dim);
+            font-size: 0.9em;
+            max-width: 520px;
+            margin: 0 auto 25px auto;
+            border-left: 3px solid var(--term-border);
+            padding-left: 12px;
+            text-align: left;
+            font-style: italic;
+        }
+
+        .cli-btn {
+            color: var(--cyan);
+            text-decoration: none;
+            cursor: pointer;
+            display: inline-block;
+            padding: 2px 6px;
+            transition: all 0.1s step-start;
+        }
+
+        .cli-btn:hover {
+            color: var(--term-bg);
+            background-color: var(--cyan);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="terminal-window">
+        <div class="terminal-header">
+            <span>htcpcp://daemon:418 ~ BREW</span>
+            <div class="window-controls">
+                <span class="control-dot"></span>
+                <span class="control-dot"></span>
+                <span class="control-dot"></span>
+            </div>
+        </div>
+
+        <div class="terminal-body">
+            <h1>418</h1>
+            <div class="status-msg">HTTP/1.1 418 I'm a teapot</div>
+
+            <div class="ascii-art">
+             ;,'
+     _o_    ;:;'
+ ,-.'---`.__ ;
+((j`=====',-'
+ `-\     /
+    `-=-'
+            </div>
+
+            <div class="rfc-quote">
+                RFC 2324: "Any attempt to brew coffee with a teapot should result in the error code 418 I'm a teapot. The resulting entity body MAY be short and stout."
+            </div>
+
+            <div>
+                [<a class="cli-btn" href="index.html">Return to Terminal</a>]
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
