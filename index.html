@@ -158,6 +158,7 @@
         // Тайминги, настроенные вами
         const TYPE_SPEED = 100;
         const LINE_PAUSE = 800;
+        const SPACE_PAUSE = 250;
         const START_DELAY = 1500;
 
         function sleep(ms) {
@@ -196,6 +197,9 @@
 
                 for (let i = 0; i < item.text.length; i++) {
                     const char = item.text[i];
+                    if (char === " ") {
+                        await sleep(SPACE_PAUSE);
+                    }
                     targetElement.appendChild(document.createTextNode(char));
 
                     if (char === "\n") {
